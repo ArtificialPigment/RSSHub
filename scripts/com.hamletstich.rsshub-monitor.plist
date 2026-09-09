@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.hamletstich.rsshub-monitor</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/zsh</string>
+        <string>-lc</string>
+        <string>cd "/Users/hamletstich/Desktop/RSSHub 工作资讯/rsshub" &amp;&amp; pnpm exec tsx scripts/monitor.ts</string>
+    </array>
+    <key>StartInterval</key>
+    <integer>7200</integer>
+    <key>StandardOutPath</key>
+    <string>/tmp/rsshub-monitor.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/rsshub-monitor.log</string>
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>

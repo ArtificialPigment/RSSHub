@@ -42,3 +42,5 @@ yarn.lock
 yarn-error.log
 
 dist-container
+.monitor-state.json
+.claude/
