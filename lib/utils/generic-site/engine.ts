@@ -1,6 +1,7 @@
 import { load } from 'cheerio';
 import type { Context } from 'hono';
 
+import { config } from '@/config';
 import type { Data, DataItem } from '@/types';
 import cache from '@/utils/cache';
 import logger from '@/utils/logger';
@@ -117,7 +118,9 @@ function attachmentType(link: string): string | undefined {
 export function makeSiteHandler(site: SiteConfig) {
     return async (ctx: Context): Promise<Data> => {
         const limit = site.limit ?? 20;
-        const imageProxyBase = site.imageProxy ? new URL('/college/image-proxy', ctx.req.url).href : undefined;
+        // 实例开启 ACCESS_KEY 时，代理 URL 必须携带 key，否则正文图片被访问控制拦截
+        const keyQuery = config.accessKey ? `?key=${config.accessKey}&` : '?';
+        const imageProxyBase = site.imageProxy ? `${new URL('/college/image-proxy', ctx.req.url).href}${keyQuery}` : undefined;
 
         const perChannel = await mapPool(site.channels, 2, async (channel) => {
             try {
