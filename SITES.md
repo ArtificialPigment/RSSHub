@@ -73,4 +73,4 @@ dev server 运行中直接 `curl -s http://127.0.0.1:1200/<namespace>/<site-id>`
 - 详情页抓取并发上限 4、栏目抓取并发上限 2，引擎内置
 - 降级设计：单篇详情失败只降级该条目；单栏目列表失败只丢该栏目；PDF/附件直链自动挂为 enclosure 并在正文写附件链接
 - 监控：`scripts/monitor.ts` 巡检全部自制路由（HTTP 状态 + 最新条目时效，阈值取各站 `updateThresholdDays`），launchd 每 2 小时执行，异常经 agently-cli 发邮件至 hamlet.stich@gmail.com；状态迁移才发信，持续异常不重复。新站接入后无需改动监控——注册表登记即自动纳入巡检
-- 低频站点（寒暑假空窗超 2 周的）`updateThresholdDays` 放宽到 30，防止假期误报
+- 低频站点（寒暑假空窗超 2 周的）`updateThresholdDays` 放宽到 30，防止假期误报；慢性低频站（非季节性，活跃栏目间隔以月计）按典型间隔 2–3 倍定，可超过 30（实例：sxtcm-gj 取 90）
