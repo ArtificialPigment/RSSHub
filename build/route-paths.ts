@@ -711,6 +711,8 @@ export type RoutePath =
   | `/collabo-cafe/`
   | `/collabo-cafe/category/:category`
   | `/collabo-cafe/tag/:tag`
+  | `/college/:site`
+  | `/college/image-proxy`
   | `/comic-fuz/magazine/:id`
   | `/comic-fuz/manga/:id`
   | `/comic-walker/manga/:id`
@@ -1474,6 +1476,7 @@ export type RoutePath =
   | `/gov/sh/wsjkw/yqtb`
   | `/gov/sh/yjj/:path{.+}?`
   | `/gov/shaanxi/kjt/:id?`
+  | `/gov/shanxi/:site`
   | `/gov/shanxi/rst/:category`
   | `/gov/shenzhen/hrss/szksy/:caty/:page?`
   | `/gov/shenzhen/szlh/zwfw/zffw/:caty`

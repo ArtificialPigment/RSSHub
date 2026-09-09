@@ -10087,6 +10087,12 @@
   "/coindesk/news": [
     "pseudoyu"
   ],
+  "/college/image-proxy": [
+    "ArtificialPigment"
+  ],
+  "/college/:site": [
+    "ArtificialPigment"
+  ],
   "/coolapk/dyh/:dyhId": [
     "xizeyoupan"
   ],
@@ -10756,6 +10762,9 @@
   ],
   "/gov/shanxi/rst/:category": [
     "wolfyu1991"
+  ],
+  "/gov/shanxi/:site": [
+    "ArtificialPigment"
   ],
   "/gov/shenzhen/hrss/szksy/:caty/:page?": [
     "zlasd"
