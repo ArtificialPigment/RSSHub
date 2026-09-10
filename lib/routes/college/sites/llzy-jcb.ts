@@ -14,6 +14,7 @@ const site: SiteConfig = {
     id: 'llzy-jcb',
     name: '吕梁职业技术学院基础部',
     url: 'https://www.llzy.edu.cn/jichubu/',
+    icon: 'https://present.zigzagyang.monster/rsshub-icons/college/llzy-jcb.png',
     channels: [
         { name: '最新动态', listUrl: 'https://www.llzy.edu.cn/jichubu/zuixindongtai/' },
         { name: '通知公告', listUrl: 'https://www.llzy.edu.cn/jichubu/tongzhigonggao/' },

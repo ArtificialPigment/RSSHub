@@ -9,6 +9,7 @@ const site: SiteConfig = {
     id: 'sxufe-jmwy',
     name: '山西财经大学经贸外语学院',
     url: 'https://jmwy.sxufe.edu.cn',
+    icon: 'https://present.zigzagyang.monster/rsshub-icons/college/sxufe-jmwy.png',
     channels: [
         { name: '学院新闻', listUrl: 'https://jmwy.sxufe.edu.cn/index/xyxw.htm' },
         { name: '通知公告', listUrl: 'https://jmwy.sxufe.edu.cn/index/tzgg.htm' },

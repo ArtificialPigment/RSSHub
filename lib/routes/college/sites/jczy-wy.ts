@@ -25,6 +25,7 @@ const site: SiteConfig = {
     id: 'jczy-wy',
     name: '晋城职业技术学院外语系',
     url: 'https://www.sxjczy.cn/jczy/thtl/jgsz/jxbm/wyx/index.html',
+    icon: 'https://present.zigzagyang.monster/rsshub-icons/college/jczy-wy.png',
     channels: [
         { name: '学院公告', listUrl: 'https://www.sxjczy.cn/jczy/thtl/xyxw/xygg/index.html' },
         { name: '学院通知', listUrl: 'https://www.sxjczy.cn/jczy/thtl/xyxw/xytz/index.html' },

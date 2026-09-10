@@ -16,6 +16,7 @@ const site: SiteConfig = {
     id: 'sxdtdx-wgy',
     name: '山西大同大学外国语学院',
     url: 'https://wgyxy.sxdtdx.edu.cn',
+    icon: 'https://present.zigzagyang.monster/rsshub-icons/college/sxdtdx-wgy.png',
     channels: [
         {
             name: '学院新闻',

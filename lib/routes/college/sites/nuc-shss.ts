@@ -6,6 +6,7 @@ const site: SiteConfig = {
     id: 'nuc-shss',
     name: '中北大学人文社会科学学院',
     url: 'https://shss.nuc.edu.cn',
+    icon: 'https://present.zigzagyang.monster/rsshub-icons/college/nuc-shss.png',
     channels: [{ name: '学院新闻', listUrl: 'https://shss.nuc.edu.cn/xyxw.htm' }],
     list: {
         item: '.list .right ul li',

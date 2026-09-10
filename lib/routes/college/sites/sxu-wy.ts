@@ -8,6 +8,7 @@ const site: SiteConfig = {
     id: 'sxu-wy',
     name: '山西大学外国语学院',
     url: 'https://wy.sxu.edu.cn',
+    icon: 'https://present.zigzagyang.monster/rsshub-icons/college/sxu-wy.png',
     channels: [{ name: '院系快讯', listUrl: 'https://wy.sxu.edu.cn/xydt/wykx/index.htm' }],
     list: {
         item: '.wy-news li',

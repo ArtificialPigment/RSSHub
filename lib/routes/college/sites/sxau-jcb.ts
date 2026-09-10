@@ -8,6 +8,7 @@ const site: SiteConfig = {
     id: 'sxau-jcb',
     name: '山西农业大学基础部',
     url: 'https://wlxy.sxau.edu.cn',
+    icon: 'https://present.zigzagyang.monster/rsshub-icons/college/sxau-jcb.png',
     channels: [
         { name: '学院新闻', listUrl: 'https://wlxy.sxau.edu.cn/index/xyxw.htm' },
         { name: '通知公告', listUrl: 'https://wlxy.sxau.edu.cn/index/tzgg.htm' },

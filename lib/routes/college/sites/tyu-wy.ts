@@ -14,6 +14,7 @@ const site: SiteConfig = {
     id: 'tyu-wy',
     name: '太原学院外语系',
     url: 'https://www.tyu.edu.cn/wyux/index.htm',
+    icon: 'https://present.zigzagyang.monster/rsshub-icons/college/tyu-wy.png',
     channels: [
         { name: '系部动态', listUrl: 'https://www.tyu.edu.cn/wyux/xbdt.htm' },
         { name: '教学科研', listUrl: 'https://www.tyu.edu.cn/wyux/jxky.htm' },

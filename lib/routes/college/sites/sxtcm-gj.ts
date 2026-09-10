@@ -11,6 +11,7 @@ const site: SiteConfig = {
     id: 'sxtcm-gj',
     name: '山西中医药大学国际教育学院',
     url: 'https://gjzx.sxtcm.edu.cn',
+    icon: 'https://present.zigzagyang.monster/rsshub-icons/college/sxtcm-gj.png',
     channels: [
         { name: '学院要闻', listUrl: 'https://gjzx.sxtcm.edu.cn/xyyw.htm' },
         { name: '通知公告', listUrl: 'https://gjzx.sxtcm.edu.cn/tzgg.htm' },

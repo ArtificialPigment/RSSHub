@@ -7,6 +7,7 @@ const site: SiteConfig = {
     id: 'jyt-ggtz',
     name: '山西省教育厅 - 公告通知',
     url: 'https://jyt.shanxi.gov.cn/xwzx/ggtz/',
+    icon: 'https://present.zigzagyang.monster/rsshub-icons/gov/shanxi/jyt-ggtz.png',
     channels: [{ name: '公告通知', listUrl: 'https://jyt.shanxi.gov.cn/xwzx/ggtz/' }],
     list: {
         item: '.xwzx_ggtz ul.fl li',

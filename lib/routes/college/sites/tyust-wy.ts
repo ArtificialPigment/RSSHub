@@ -12,6 +12,7 @@ const site: SiteConfig = {
     id: 'tyust-wy',
     name: '太原科技大学外国语学院',
     url: 'https://wy.tyust.edu.cn',
+    icon: 'https://present.zigzagyang.monster/rsshub-icons/college/tyust-wy.png',
     channels: [
         { name: '学院新闻', listUrl: 'https://wy.tyust.edu.cn/index/xyxw.htm' },
         { name: '团学活动', listUrl: 'https://wy.tyust.edu.cn/txgz/txhd.htm' },

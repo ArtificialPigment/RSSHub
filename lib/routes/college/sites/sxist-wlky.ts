@@ -7,6 +7,7 @@ const site: SiteConfig = {
     id: 'sxist-wlky',
     name: '山西科技学院文旅康养学院',
     url: 'https://wlkyxy.sxist.edu.cn',
+    icon: 'https://present.zigzagyang.monster/rsshub-icons/college/sxist-wlky.png',
     channels: [
         { name: '新闻动态', listUrl: 'https://wlkyxy.sxist.edu.cn/xwdt.htm' },
         { name: '通知公告', listUrl: 'https://wlkyxy.sxist.edu.cn/tzgg.htm' },

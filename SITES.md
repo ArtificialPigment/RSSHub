@@ -1,6 +1,6 @@
 # SITES.md — 新站接入流程
 
-读者：为本仓库 `college/`、`gov/shanxi/` 两个自制 namespace 接入新站点的 Claude。
+读者：为本仓库 `college/`、`gov/shanxi/`、`publisher/` 三个自制 namespace 接入新站点的 Claude。
 路由代码风格与 PR 规范遵循上游 AGENTS.md 与 CONTRIBUTING.md，本文不重复。
 
 ## 布局

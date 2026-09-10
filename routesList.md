@@ -9,15 +9,14 @@
 
 ## 第一期（2026-09 完成）
 
-| 站点 ID       | 名称                     | 路由                        | 源 URL                         | 状态                    |
-| ------------- | ------------------------ | --------------------------- | ------------------------------ | ----------------------- |
-| sxu-wy        | 山西大学外国语学院       | `/college/sxu-wy`           | https://wy.sxu.edu.cn          | ✅                      |
-| sxau-jcb      | 山西农业大学基础部       | `/college/sxau-jcb`         | https://jcb.sxau.edu.cn        | ✅                      |
-| sxufe-jmwy    | 山西财经大学经贸外语学院 | `/college/sxufe-jmwy`       | —（见站点配置）                | ✅                      |
-| nuc-shss      | 中北大学人文社会科学学院 | `/college/nuc-shss`         | —（见站点配置）                | ✅                      |
-| sxist-wlky    | 山西工程技术学院（wlky） | `/college/sxist-wlky`       | —（见站点配置）                | ✅                      |
-| jyt-ggtz      | 山西省教育厅公告通知     | `/gov/shanxi/jyt-ggtz`      | —（见站点配置）                | ✅                      |
-| rst（多分类） | 山西人事考试专栏         | `/gov/shanxi/rst/:category` | http://rst.shanxi.gov.cn/rsks/ | ✅ 独立路由，非通用引擎 |
+| 站点 ID    | 名称                     | 路由                   | 源 URL                      | 状态 |
+| ---------- | ------------------------ | ---------------------- | --------------------------- | ---- |
+| sxu-wy     | 山西大学外国语学院       | `/college/sxu-wy`      | https://wy.sxu.edu.cn       | ✅   |
+| sxau-jcb   | 山西农业大学基础部       | `/college/sxau-jcb`    | https://jcb.sxau.edu.cn     | ✅   |
+| sxufe-jmwy | 山西财经大学经贸外语学院 | `/college/sxufe-jmwy`  | —（见站点配置）             | ✅   |
+| nuc-shss   | 中北大学人文社会科学学院 | `/college/nuc-shss`    | —（见站点配置）             | ✅   |
+| sxist-wlky | 山西科技学院文旅康养学院 | `/college/sxist-wlky`  | https://wlkyxy.sxist.edu.cn | ✅   |
+| jyt-ggtz   | 山西省教育厅公告通知     | `/gov/shanxi/jyt-ggtz` | —（见站点配置）             | ✅   |
 
 ## 第二期（2026-09-09 完成）
 
@@ -29,3 +28,11 @@
 | llzy-jcb   | 吕梁职业技术学院基础部     | `/college/llzy-jcb`   | https://www.llzy.edu.cn/jichubu/                         | ✅   | UTF-8，帝国CMS。入口 wap 页弃用，改 PC 版 /jichubu/，收最新动态+通知公告。⚠️ 暑期空窗（最新 2026-06-04），阈值 30，开学后复查                                         |
 | sxtcm-gj   | 山西中医药大学国际教育学院 | `/college/sxtcm-gj`   | https://gjzx.sxtcm.edu.cn                                | ✅   | UTF-8，VSB9，4 栏目。慢性低频站（合并后间隔 1–1.5 月），阈值 90                                                                                                       |
 | tyust-wy   | 太原科技大学外国语学院     | `/college/tyust-wy`   | https://wy.tyust.edu.cn/index.htm                        | ✅   | UTF-8，博达VSB，4 栏目。需求文档误写"太原科技学院"，实为太原科技大学。⚠️ 暑期停更（最新 2026-06-17），阈值 30，开学后复查                                             |
+
+## 出版机构（2026-09-10 接入）
+
+新 namespace `/publisher`，通用引擎驱动。
+
+| 站点 ID    | 名称            | 路由                    | 源 URL                      | 状态 | 备注                                                                                                                                                                                                               |
+| ---------- | --------------- | ----------------------- | --------------------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| fltrp-xwdt | 外研社·外研动态 | `/publisher/fltrp-xwdt` | https://www.fltrp.com/xwdt/ | ✅   | UTF-8，自研模板。4 栏目：xwdt 汇总页（qyxw/hdss/xsky 最新合并）+ wygg 外研公告 + djzl 党建工作 + cbrhsys 出版融合实验室。实验室为慢性低频栏目，用 `minPerChannel: 2` 保底防挤出（引擎新增字段），limit 30；阈值 14 |
