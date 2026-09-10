@@ -6,5 +6,7 @@ import type { SiteConfig } from '@/utils/generic-site/types';
  * 并在此登记。接入流程见仓库根目录 SITES.md。
  */
 import fltrpXwdt from './fltrp-xwdt';
+import njupcoNews from './njupco-news';
+import sflepXwzx from './sflep-xwzx';
 
-export const sites: Record<string, SiteConfig> = Object.fromEntries([fltrpXwdt].map((site) => [site.id, site]));
+export const sites: Record<string, SiteConfig> = Object.fromEntries([fltrpXwdt, njupcoNews, sflepXwzx].map((site) => [site.id, site]));

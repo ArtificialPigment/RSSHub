@@ -65,6 +65,7 @@ dev server 运行中直接 `curl -s http://127.0.0.1:1200/<namespace>/<site-id>`
 - **PDF/附件直链**（教育厅公告常见）：引擎按扩展名自动挂为 RSS enclosure，并在正文写附件链接兜底（部分阅读器不渲染 enclosure）；同站混有 HTML 详情页时照常配 `detail`
 - **需 JS 渲染**（探测脚本报"未找到列表容器"且正文链接数极少）：该站单独定制，用 `@/utils/playwright-fetch`
 - **图片在阅读器里全挂、但 curl 能下到**：站方 WAF 拦截 HTTP/2 的特征（真实案例：wlxy.sxau.edu.cn 对 h2 请求返回空响应，h1 正常）。给站点配置加 `imageProxy: true`，正文图片改经 `/college/image-proxy` 用 HTTP/1.1 回源。验证方法：`node` 的 `http2` 模块请求图片 URL，0 字节即中招
+- **详情页外链微信公众号**（出版社站常见，官网只存标题+摘要）：`detail` 直接配微信文章选择器 `{ title: '#activity-name', content: '#js_content' }` 即可出全文——应用内请求经 request-rewriter 统一带浏览器 UA，微信不拦截。注意独立脚本裸跑 `fetchPage` 不带该 UA，会拿到「环境异常」验证页，探测详情页时应换浏览器 UA 的 curl 验证，勿误判为路由失效（实例：sflep-xwzx）
 - **结构不适配通用引擎**：在 namespace 下写独立路由文件，仍可复用 `fetchPage` / `cleanContent`
 
 ## 运维备注
