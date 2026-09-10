@@ -11555,6 +11555,9 @@
   "/pts/tag/:id": [
     "nczitzk"
   ],
+  "/publisher/:site": [
+    "ArtificialPigment"
+  ],
   "/qq/weread/:category": [
     "gogo-100"
   ],

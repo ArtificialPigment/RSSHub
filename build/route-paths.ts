@@ -2710,6 +2710,7 @@ export type RoutePath =
   | `/publico/public`
   | `/publico/sociedad/:subsection?`
   | `/publico/tremending`
+  | `/publisher/:site`
   | `/pubmed/trending/:filters?`
   | `/pubscholar/explore/:category?/:keyword?`
   | `/pumc/mdadmission`

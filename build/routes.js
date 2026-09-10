@@ -149508,6 +149508,33 @@ export default {
     "url": "news.pts.org.tw",
     "lang": "zh-TW"
   },
+  "publisher": {
+    "routes": {
+      "/:site": {
+        "path": "/:site",
+        "categories": [
+          "reading"
+        ],
+        "example": "/publisher/fltrp-xwdt",
+        "parameters": {
+          "site": "站点 ID，见 sites/ 目录下各站点配置"
+        },
+        "name": "出版机构动态",
+        "maintainers": [
+          "ArtificialPigment"
+        ],
+        "location": "index.ts",
+        "module": () => import('@/routes/publisher/index.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "出版机构",
+    "description": "出版社官网新闻动态（自制路由）",
+    "categories": [
+      "reading"
+    ],
+    "lang": "zh-CN"
+  },
   "qq": {
     "routes": {
       "/weread/:category": {
