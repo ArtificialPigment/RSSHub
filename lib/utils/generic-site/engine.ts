@@ -131,9 +131,9 @@ export function makeSiteHandler(site: SiteConfig) {
             }
         });
 
-        // 合并栏目 → 按链接去重（嵌套 table 布局的老站，父行可能被选择器重复匹配）→ 按日期倒序 → 截断
+        // 合并栏目 → 按链接去重（嵌套 table 布局的老站，父行可能被选择器重复匹配）→ 按日期倒序
         const seenLinks = new Set<string>();
-        const entries = perChannel
+        const sorted = perChannel
             .flat()
             .filter((entry) => {
                 if (seenLinks.has(entry.link)) {
@@ -142,8 +142,30 @@ export function makeSiteHandler(site: SiteConfig) {
                 seenLinks.add(entry.link);
                 return true;
             })
-            .toSorted((a, b) => (b.pubDate?.getTime() ?? 0) - (a.pubDate?.getTime() ?? 0))
-            .slice(0, limit);
+            .toSorted((a, b) => (b.pubDate?.getTime() ?? 0) - (a.pubDate?.getTime() ?? 0));
+
+        // minPerChannel > 0 时先为每个栏目保底其最新 N 条（防止低频栏目被活跃栏目挤出），
+        // 剩余名额按日期倒序填满 limit，最终输出仍按日期倒序
+        let entries = sorted.slice(0, limit);
+        const minPerChannel = site.minPerChannel ?? 0;
+        if (minPerChannel > 0) {
+            const channelCounts = new Map<string, number>();
+            const selected = new Set<ListEntry>();
+            for (const entry of sorted) {
+                const count = channelCounts.get(entry.channel.name) ?? 0;
+                if (count < minPerChannel) {
+                    selected.add(entry);
+                    channelCounts.set(entry.channel.name, count + 1);
+                }
+            }
+            for (const entry of sorted) {
+                if (selected.size >= limit) {
+                    break;
+                }
+                selected.add(entry);
+            }
+            entries = [...selected].toSorted((a, b) => (b.pubDate?.getTime() ?? 0) - (a.pubDate?.getTime() ?? 0));
+        }
 
         const items = await mapPool(entries, 4, async (entry): Promise<DataItem> => {
             const base: DataItem = {
@@ -198,6 +220,10 @@ export function makeSiteHandler(site: SiteConfig) {
             title: site.name,
             link: site.url,
             description: `${site.name} - 新闻公告`,
+            // 三种输出各认一个字段：RSS <image>、Atom icon/logo、JSON Feed icon（取 image）
+            image: site.icon,
+            icon: site.icon,
+            logo: site.icon,
             item: items,
         };
     };

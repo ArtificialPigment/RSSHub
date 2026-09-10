@@ -92,6 +92,12 @@ export interface SiteConfig {
     url: string;
 
     /**
+     * 订阅图标 URL（写入 feed 的 icon/logo 字段）。
+     * 自制站点的图标统一放 OSS：https://present.zigzagyang.monster/rsshub-icons/<路由路径>.png
+     */
+    icon?: string;
+
+    /**
      * 栏目列表。一个站点（一条路由）可含多个栏目，引擎合并后按日期倒序输出。
      * 单栏目站点也用这个字段（只写一个栏目）
      */
@@ -124,6 +130,13 @@ export interface SiteConfig {
      * 抓取条数上限，默认 20
      */
     limit?: number;
+
+    /**
+     * 每栏目保底条数：合并截断时每个栏目至少保留其最新 N 条，其余名额按日期倒序填满。
+     * 用于活跃栏目与慢性低频栏目合并的站点——纯按日期截断会把低频栏目（如停更存档栏目）
+     * 永远挤出 limit，订阅者收不到它的新条目。默认 0（不保底，纯按日期）
+     */
+    minPerChannel?: number;
 
     /**
      * 自定义日期解析器，处理站点特有的奇葩日期格式。
