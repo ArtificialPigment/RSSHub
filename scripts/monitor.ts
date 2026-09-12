@@ -20,6 +20,8 @@ import { promisify } from 'node:util';
 
 import { sites as collegeSites } from '../lib/routes/college/sites';
 import { sites as govShanxiSites } from '../lib/routes/gov/shanxi/sites';
+import { sites as nationalSites } from '../lib/routes/national/sites';
+import { sites as publisherSites } from '../lib/routes/publisher/sites';
 import type { SiteConfig } from '../lib/utils/generic-site/types';
 
 const execFileAsync = promisify(execFile);
@@ -43,6 +45,8 @@ interface State {
 const targets: FeedTarget[] = [
     ...Object.values(collegeSites).map((s: SiteConfig) => ({ id: s.id, name: s.name, path: `/college/${s.id}`, thresholdDays: s.updateThresholdDays ?? 14 })),
     ...Object.values(govShanxiSites).map((s: SiteConfig) => ({ id: s.id, name: s.name, path: `/gov/shanxi/${s.id}`, thresholdDays: s.updateThresholdDays ?? 14 })),
+    ...Object.values(publisherSites).map((s: SiteConfig) => ({ id: s.id, name: s.name, path: `/publisher/${s.id}`, thresholdDays: s.updateThresholdDays ?? 14 })),
+    ...Object.values(nationalSites).map((s: SiteConfig) => ({ id: s.id, name: s.name, path: `/national/${s.id}`, thresholdDays: s.updateThresholdDays ?? 14 })),
 ];
 
 async function sendMail(subject: string, body: string) {
