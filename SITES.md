@@ -1,6 +1,6 @@
 # SITES.md — 新站接入流程
 
-读者：为本仓库 `college/`、`gov/shanxi/`、`publisher/` 三个自制 namespace 接入新站点的 Claude。
+读者：为本仓库 `college/`、`gov/shanxi/`、`publisher/`、`national/` 四个自制 namespace 接入新站点的 Claude。
 路由代码风格与 PR 规范遵循上游 AGENTS.md 与 CONTRIBUTING.md，本文不重复。
 
 ## 布局
@@ -67,6 +67,7 @@ dev server 运行中直接 `curl -s http://127.0.0.1:1200/<namespace>/<site-id>`
 - **图片在阅读器里全挂、但 curl 能下到**：站方 WAF 拦截 HTTP/2 的特征（真实案例：wlxy.sxau.edu.cn 对 h2 请求返回空响应，h1 正常）。给站点配置加 `imageProxy: true`，正文图片改经 `/college/image-proxy` 用 HTTP/1.1 回源。验证方法：`node` 的 `http2` 模块请求图片 URL，0 字节即中招
 - **详情页外链微信公众号**（出版社站常见，官网只存标题+摘要）：`detail` 直接配微信文章选择器 `{ title: '#activity-name', content: '#js_content' }` 即可出全文——应用内请求经 request-rewriter 统一带浏览器 UA，微信不拦截。注意独立脚本裸跑 `fetchPage` 不带该 UA，会拿到「环境异常」验证页，探测详情页时应换浏览器 UA 的 curl 验证，勿误判为路由失效（实例：sflep-xwzx）
 - **结构不适配通用引擎**：在 namespace 下写独立路由文件，仍可复用 `fetchPage` / `cleanContent`
+- **正文容器混入标题/日期/责编等噪声**（政府站常见，容器内无更细正文包装）：用 `detail.remove` 逗号并联选择器在清洗前剔除（实例：nopss 的 `.text_con` 内含 h1/h5/.edit；moe 的 `#downloadContent` 内含 h1）
 
 ## 运维备注
 

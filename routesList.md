@@ -38,3 +38,12 @@
 | fltrp-xwdt  | 外研社·外研动态         | `/publisher/fltrp-xwdt`  | https://www.fltrp.com/xwdt/          | ✅   | UTF-8，自研模板。4 栏目：xwdt 汇总页（qyxw/hdss/xsky 最新合并）+ wygg 外研公告 + djzl 党建工作 + cbrhsys 出版融合实验室。实验室为慢性低频栏目，用 `minPerChannel: 2` 保底防挤出（引擎新增字段），limit 30；阈值 14                                                                             |
 | sflep-xwzx  | 外教社·新闻资讯         | `/publisher/sflep-xwzx`  | https://www.sflep.com/list-20-1.html | ✅   | UTF-8，PHPCMS，单栏目。详情全部外链微信公众号，detail 直配微信文章选择器（#activity-name/#js_content），应用内请求自带浏览器 UA 故可出全文；独立脚本裸跑 fetchPage 会被微信拦（环境异常页），属正常。阈值 14                                                                                   |
 | njupco-news | 南京大学出版社·新闻中心 | `/publisher/njupco-news` | http://www.njupco.com/news/          | ✅   | UTF-8（虽老站非 GBK），帝国CMS，仅 http。2 栏目：press 本社新闻 + media 媒体聚焦（低频，`minPerChannel: 2`）。列表收站内自稿 + 微信转载两类（`:has()` 双分支），detail 逗号并联选择器 `.ny_con .content, #js_content` 两类页面各命中一组；澎湃/上观等外链仍舍弃。标题截断用 titleAttr；阈值 45 |
+
+## 国家资讯（2026-09-12 开工）
+
+新 namespace `/national`，通用引擎驱动。
+
+| 站点 ID | 名称                       | 路由              | 源 URL                                | 状态 | 备注                                                                                                                                                                                                                                                                                     |
+| ------- | -------------------------- | ----------------- | ------------------------------------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| nopss   | 全国哲学社会科学工作办公室 | `/national/nopss` | http://www.nopss.gov.cn/GB/index.html | ✅   | UTF-8，人民网 CMS，仅 http。2 栏目：通知公告（聚合页，h2 分组即为全量最新）+ 社团工作。详情 .text_con 标题/日期/责编与正文同容器，用 `detail.remove` 剔除（引擎新增字段，首个用例）；暑期空窗 36 天，阈值 30                                                                             |
+| moe     | 中华人民共和国教育部       | `/national/moe`   | http://www.moe.gov.cn                 | ✅   | UTF-8，TRS CMS。2 栏目：教育部文件（was5 channelid=239993 裸参即全量倒序，列表截断标题靠 detail.title 补全）+ 教育要闻（#list，titleAttr）。详情两模板逗号并联：srcsite 文件页 #downloadContent（保留发文字号+PDF 附件链接）/ jyb_ 要闻页 .TRS_Editor；/fbh/live/ 直播页自动降级。阈值 7 |

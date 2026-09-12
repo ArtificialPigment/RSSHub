@@ -26,3 +26,5 @@
 | /publisher/fltrp-xwdt  | publisher/fltrp-xwdt.png  | 292×300 | 外研社社徽（红底圆形徽章），用户提供原图                                         |
 | /publisher/sflep-xwzx  | publisher/sflep-xwzx.png  | 256×256 | 外教社方形社徽 logo_01.jpg 放大（原图 55×57，官网无更高清版），本地存 jpg 源文件 |
 | /publisher/njupco-news | publisher/njupco-news.png | 459×459 | 裁自官网横幅 flogo.png 的圆形社徽（官网无独立方形社徽，favicon 404）             |
+| /national/nopss        | national/nopss.png        | 48×48   | http://www.nopss.gov.cn/img/MAIN/2019/10/119745/images/favicon.ico               |
+| /national/moe          | national/moe.png          | 85×85   | 裁自官网横幅 m_top_logo.png 左端国徽（favicon 404）                              |

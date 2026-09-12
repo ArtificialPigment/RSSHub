@@ -46,6 +46,13 @@ export interface DetailSelectors {
      * 详情页正文选择器（必填，抓全文的核心）
      */
     content: string;
+
+    /**
+     * 正文清洗前先从 content 容器内移除的元素（逗号并联选择器）。
+     * 用于正文容器与标题/日期/责编等噪声同级的站点（政府站常见，如 nopss 的
+     * .text_con 内含 h1/h5，moe 的 #downloadContent 内含 h1），只剔除噪声、保留正文
+     */
+    remove?: string;
 }
 
 export interface ChannelConfig {

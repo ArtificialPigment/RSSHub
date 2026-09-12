@@ -204,10 +204,15 @@ export function makeSiteHandler(site: SiteConfig) {
 
                     const detailDate = detail.date ? parseSiteDate(site, $(detail.date).text()) : undefined;
 
+                    const $content = $(detail.content).first();
+                    if (detail.remove) {
+                        $content.find(detail.remove).remove();
+                    }
+
                     return {
                         ...base,
                         title: (detail.title ? $(detail.title).text().trim() : '') || base.title,
-                        description: cleanContent($, $(detail.content).first(), entry.link, imageProxyBase),
+                        description: cleanContent($, $content, entry.link, imageProxyBase),
                         pubDate: detailDate ?? base.pubDate,
                     };
                 } catch {
