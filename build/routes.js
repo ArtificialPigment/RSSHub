@@ -147613,6 +147613,33 @@ export default {
     "url": "m.mydrivers.com",
     "lang": "zh-CN"
   },
+  "national": {
+    "routes": {
+      "/:site": {
+        "path": "/:site",
+        "categories": [
+          "government"
+        ],
+        "example": "/national/nopss",
+        "parameters": {
+          "site": "站点 ID，见 sites/ 目录下各站点配置"
+        },
+        "name": "国家机构资讯",
+        "maintainers": [
+          "ArtificialPigment"
+        ],
+        "location": "index.ts",
+        "module": () => import('@/routes/national/index.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "国家资讯",
+    "description": "国家级机构官网资讯（自制路由）",
+    "categories": [
+      "government"
+    ],
+    "lang": "zh-CN"
+  },
   "nber": {
     "routes": {
       "/papers": {

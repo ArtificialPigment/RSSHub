@@ -2311,6 +2311,7 @@ export type RoutePath =
   | `/natgeo/:cat/:type?`
   | `/natgeo/dailyphoto`
   | `/natgeo/dailyselection`
+  | `/national/:site`
   | `/nationalgeographic/latest-stories`
   | `/naturalism/`
   | `/nature/cover`
