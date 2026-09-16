@@ -1,4 +1,6 @@
 import type { SiteConfig } from '@/utils/generic-site/types';
+import { parseDate } from '@/utils/parse-date';
+import timezone from '@/utils/timezone';
 
 // 全国哲学社会科学工作办公室（人民网承办，入口 http://www.nopss.gov.cn/GB/index.html ，仅 http）
 // 探测日期 2026-09-12：UTF-8，人民网 CMS（/n1/YYYY/MMDD/c<栏目id>-<文章id>.html 详情路径）
@@ -25,6 +27,21 @@ const site: SiteConfig = {
     list: {
         item: '.list_con_2j ul li',
         date: 'em',
+    },
+    // 日期格式有两套：列表 em 为 [YYYY-MM-DD HH:mm]，详情页 h5 为 YYYY年MM月DD日HH:mm（无空格）。
+    // 引擎默认解析只取日期部分，同日多条全部挤在 00:00，阅读器内二次排序不稳定。
+    // 这里把分钟精度吃进来；详情页时间来自同一发布时间，覆盖列表值无损。
+    // 无时间部分时返回 undefined，走引擎默认解析兜底
+    dateParser: (text) => {
+        const iso = text.match(/\d{4}[-.]\d{1,2}[-.]\d{1,2}\s+\d{1,2}:\d{2}/);
+        if (iso) {
+            return timezone(parseDate(iso[0]), 8);
+        }
+        const cn = text.match(/(\d{4})年(\d{1,2})月(\d{1,2})日\s*(\d{1,2}):(\d{2})/);
+        if (cn) {
+            return timezone(parseDate(`${cn[1]}-${cn[2]}-${cn[3]} ${cn[4]}:${cn[5]}`), 8);
+        }
+        return;
     },
     detail: {
         title: '.text_con h1',
