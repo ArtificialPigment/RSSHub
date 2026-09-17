@@ -84,9 +84,15 @@ async function fetchChannelEntries(site: SiteConfig, channel: ChannelConfig, lim
                 return;
             }
             const rawTitle = list.titleAttr ? ($link.attr(list.titleAttr) ?? '') : list.title ? $item.find(list.title).text() : $link.text();
+            const url = new URL(href, channel.listUrl);
+            // 微信外链剥离 poc_token 跟踪参数：带参链接服务端会返回"未知错误"验证页，
+            // 规范链接正常（真实案例：njupco-news 列表偶发 poc_token 链接）
+            if (url.hostname === 'mp.weixin.qq.com') {
+                url.searchParams.delete('poc_token');
+            }
             return {
                 title: rawTitle.trim(),
-                link: new URL(href, channel.listUrl).href,
+                link: url.href,
                 channel,
                 pubDate: list.date ? parseSiteDate(site, $item.find(list.date).text()) : undefined,
             };
@@ -197,8 +203,10 @@ export function makeSiteHandler(site: SiteConfig) {
                 return base;
             }
 
-            return await cache.tryGet(entry.link, async () => {
-                try {
+            // 降级结果（catch 的 base）不缓存——瞬时失败若被缓存，要等 contentExpire 才自愈
+            // （真实案例：sxie-jcb 微信详情偶发失败被缓存，阅读器长期看到空正文）
+            try {
+                return await cache.tryGet(entry.link, async () => {
                     const detailHtml = await fetchPage(entry.link, encoding);
                     const $ = load(detailHtml);
 
@@ -209,16 +217,23 @@ export function makeSiteHandler(site: SiteConfig) {
                         $content.find(detail.remove).remove();
                     }
 
+                    // 正文为空视为抓取失败（选择器失配/拦截验证页），抛出后不缓存、走降级
+                    const description = cleanContent($, $content, entry.link, imageProxyBase);
+                    if (!description.trim()) {
+                        throw new Error(`正文为空（选择器 ${detail.content} 未命中）`);
+                    }
+
                     return {
                         ...base,
                         title: (detail.title ? $(detail.title).text().trim() : '') || base.title,
-                        description: cleanContent($, $content, entry.link, imageProxyBase),
+                        description,
                         pubDate: detailDate ?? base.pubDate,
                     };
-                } catch {
-                    return base;
-                }
-            });
+                });
+            } catch (error) {
+                logger.warn(`[generic-site] ${site.id} 详情抓取失败，降级为摘要条目: ${entry.link}: ${error}`);
+                return base;
+            }
         });
 
         return {
