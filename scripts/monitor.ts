@@ -36,6 +36,7 @@ interface FeedTarget {
     name: string;
     path: string;
     thresholdDays: number;
+    noDate?: boolean;
 }
 
 interface State {
@@ -43,10 +44,10 @@ interface State {
 }
 
 const targets: FeedTarget[] = [
-    ...Object.values(collegeSites).map((s: SiteConfig) => ({ id: s.id, name: s.name, path: `/college/${s.id}`, thresholdDays: s.updateThresholdDays ?? 14 })),
-    ...Object.values(govShanxiSites).map((s: SiteConfig) => ({ id: s.id, name: s.name, path: `/gov/shanxi/${s.id}`, thresholdDays: s.updateThresholdDays ?? 14 })),
-    ...Object.values(publisherSites).map((s: SiteConfig) => ({ id: s.id, name: s.name, path: `/publisher/${s.id}`, thresholdDays: s.updateThresholdDays ?? 14 })),
-    ...Object.values(nationalSites).map((s: SiteConfig) => ({ id: s.id, name: s.name, path: `/national/${s.id}`, thresholdDays: s.updateThresholdDays ?? 14 })),
+    ...Object.values(collegeSites).map((s: SiteConfig) => ({ id: s.id, name: s.name, path: `/college/${s.id}`, thresholdDays: s.updateThresholdDays ?? 14, noDate: s.noDate })),
+    ...Object.values(govShanxiSites).map((s: SiteConfig) => ({ id: s.id, name: s.name, path: `/gov/shanxi/${s.id}`, thresholdDays: s.updateThresholdDays ?? 14, noDate: s.noDate })),
+    ...Object.values(publisherSites).map((s: SiteConfig) => ({ id: s.id, name: s.name, path: `/publisher/${s.id}`, thresholdDays: s.updateThresholdDays ?? 14, noDate: s.noDate })),
+    ...Object.values(nationalSites).map((s: SiteConfig) => ({ id: s.id, name: s.name, path: `/national/${s.id}`, thresholdDays: s.updateThresholdDays ?? 14, noDate: s.noDate })),
 ];
 
 async function sendMail(subject: string, body: string) {
@@ -78,7 +79,8 @@ async function checkFeed(target: FeedTarget): Promise<string | undefined> {
         .map((m) => new Date(m[1]).getTime())
         .filter((t) => !Number.isNaN(t));
     if (dates.length === 0) {
-        return '无条目或全部条目无日期';
+        // 源站全站不发布日期的站点（noDate）：只确认 HTTP 200 能出 feed，不做时效判断
+        return target.noDate ? undefined : '无条目或全部条目无日期';
     }
     const ageDays = Math.floor((Date.now() - Math.max(...dates)) / 86_400_000);
     if (ageDays > target.thresholdDays) {

@@ -155,4 +155,10 @@ export interface SiteConfig {
      * 监控阈值：该站预期更新周期（天）。超过此天数无新条目视为异常，供监控脚本读取
      */
     updateThresholdDays?: number;
+
+    /**
+     * 源站全站不发布日期（条目无 pubDate）。监控对这类站只查 HTTP 状态，不做时效判断。
+     * 实例：cdisu、scujj-wy（源站列表+详情均无日期，非抽取缺陷）
+     */
+    noDate?: boolean;
 }
